@@ -1,0 +1,298 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 12px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.board-tile {
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  height: 100%;
+  min-height: 120px;
+}
+
+.board-tile:hover {
+  transform: scale(1);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+.board-tile .name {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 8px;
+}
+
+.board-tile .cost {
+  font-size: 0.9em;
+  color: #ffd700;
+  margin-bottom: 4px;
+}
+
+.board-tile .apy {
+  font-size: 0.9em;
+  color: #4ade80;
+}
+
+.board-tile.Validator {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+}
+
+.board-tile.Farm {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.board-tile.Bot {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.board-tile.corner {
+  background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.board-tile.event {
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+}
+
+.center-area {
+  grid-column: 2 / 5;
+  grid-row: 2 / 5;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dice {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  animation: rollDice 0.5s ease-in-out;
+}
+
+@keyframes rollDice {
+  0% { transform: scale(0.5) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Player marker animations */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Player marker styles */
+.player-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.player-marker.human {
+  background: #3498db;
+  top: 5px;
+  left: 5px;
+}
+
+.player-marker.bot {
+  background: #e74c3c;
+  top: 5px;
+  right: 5px;
+}
+
+.player-marker.current {
+  animation: bounce 1s infinite;
+}
+
+.tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 100;
+  pointer-events: none;
+  white-space: nowrap;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Game board styles */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Property ownership indicator */
+.ownership-indicator {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.ownership-indicator.human {
+  background: #3498db;
+}
+
+.ownership-indicator.bot {
+  background: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .board {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .board-tile {
+    padding: 10px;
+    min-height: 80px;
+  }
+  
+  .board-tile .name {
+    font-size: 0.8em;
+  }
+  
+  .board-tile .cost,
+  .board-tile .apy {
+    font-size: 0.75em;
+  }
+  
+  .center-area {
+    padding: 10px;
+  }
+  
+  .dice {
+    font-size: 36px;
+  }
+
+  .game-board {
+    gap: 8px;
+    padding: 12px;
+  }
+}
+
+/* Error Screen Styles */
+.error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.error-screen h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #e74c3c;
+}
+
+.error-screen p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #bdc3c7;
+}
+
+.error-screen button {
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.error-screen button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
